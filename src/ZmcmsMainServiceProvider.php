@@ -10,6 +10,8 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 	}
 
 	public function boot(){
+		$this->app['router']->middlewareGroup('ZmCmsBackend', []);
+		$this->app['router']->middlewareGroup('ZmCmsFrontend', []);
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'web.php');
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'console.php');
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'frontend\routes'.DIRECTORY_SEPARATOR.'web.php');
