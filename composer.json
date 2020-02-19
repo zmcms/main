@@ -1,0 +1,13 @@
+{
+	"name": "zmcms/main",
+	"description": "Część główna systeu ZMCMS. Zawiera podstawową logikę niezbędną do działania pozostałych składników aplikacji",
+	"authors": [
+		{
+		"name": "Piotr Szkudlarek",
+		"email": "pszkudlarek@zoltanmultimedia.pl"
+		}
+	],
+	"require": {
+		"zmcms/website_navigations":"*"
+	}
+}
