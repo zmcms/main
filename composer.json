@@ -8,6 +8,7 @@
 		}
 	],
 	"require": {
+		"zmcms/users":"*",
 		"zmcms/website_navigations":"*"
 	}
 }
