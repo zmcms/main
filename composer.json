@@ -11,6 +11,11 @@
 		"zmcms/users":"*",
 		"zmcms/website_navigations":"*"
 	},
+	"autoload": {
+            "psr-4": {
+                "Zmcms\\": "vendor//zmcms"
+            }
+    	},
 	"extra": {
     		"laravel": {
 	    	    "providers": [
