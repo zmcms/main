@@ -14,7 +14,7 @@
 	"extra": {
     		"laravel": {
 	    	    "providers": [
-        	    	"Zmcms\\WebsiteNavigations\\ZmcmsWebsiteNavigationsServiceProvider"
+        	    	"Zmcms\\Main\\ZmcmsMainServiceProvider"
         		]
     		}
 	},
