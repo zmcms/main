@@ -10,5 +10,12 @@
 	"require": {
 		"zmcms/users":"*",
 		"zmcms/website_navigations":"*"
-	}
+	},
+	"extra": {
+    		"laravel": {
+	    	    "providers": [
+        	    	"Zmcms\\WebsiteNavigations\\ZmcmsWebsiteNavigationsServiceProvider"
+        		]
+    		}
+	},
 }
