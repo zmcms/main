@@ -13,7 +13,7 @@
 	},
 	"autoload": {
             "psr-4": {
-                "Zmcms\\Main\\": ""
+                "Zmcms\\Main\\": "/vendor/zmcms/main/"
             }
     	},
 	"extra": {
