@@ -2,6 +2,7 @@
 namespace Zmcms\Main;
 use Illuminate\Support\ServiceProvider;
 use View;
+use Config;
 class ZmcmsMainServiceProvider extends ServiceProvider{
 
 	public function register(){
@@ -19,7 +20,6 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 			$m=Config('zmcms.middleware.backend');
 			foreach($m as $n)$this->app['router']->pushMiddlewareToGroup('BackendUser', $n);
 		}
-		$this->app['router']->pushMiddlewareToGroup('BackendUser', $n);
 
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'web.php');
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'console.php');
