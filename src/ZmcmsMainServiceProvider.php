@@ -13,7 +13,7 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 	public function boot(){
 		$this->app['router']->middlewareGroup('FrontendUser', []);
 		$this->app['router']->middlewareGroup('BackendUser', []);
-		if(Config::has('zmcms.middleware)){
+		if(Config::has('zmcms.middleware')){
 			$m=Config('zmcms.middleware.frontend');
 			foreach($m as $n)$this->app['router']->pushMiddlewareToGroup('FrontendUser', $n);
 			$m=Config('zmcms.middleware.backend');
