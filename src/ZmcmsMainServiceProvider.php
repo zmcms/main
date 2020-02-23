@@ -13,6 +13,13 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 	public function boot(){
 		$this->app['router']->middlewareGroup('FrontendUser', []);
 		$this->app['router']->middlewareGroup('BackendUser', []);
+		
+		$m=Config('zmcms.middleware.frontend');
+		foreach($m as $n)$this->app['router']->pushMiddlewareToGroup('FrontendUser', $n);
+		$m=Config('zmcms.middleware.backend');
+		foreach($m as $n)$this->app['router']->pushMiddlewareToGroup('BackendUser', $n);
+		$this->app['router']->pushMiddlewareToGroup('BackendUser', $n);
+
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'web.php');
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'console.php');
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'frontend\routes'.DIRECTORY_SEPARATOR.'web.php');
