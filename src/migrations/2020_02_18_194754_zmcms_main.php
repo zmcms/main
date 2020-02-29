@@ -15,10 +15,10 @@ class ZmcmsMain extends Migration{
 
 		$tblName=$tblNamePrefix.'zmcms_routes_table';
 		Schema::create($tblName, function($table){$table->string('path', 255);});  // ścieżka po adresie serwisu www
-		Schema::create($tblName, function($table){$table->string('type', 255);});  // Typ nawigacji (patrz config - website_navigations.php)
-		Schema::create($tblName, function($table){$table->string('controller', 255);});  // Kontroler przypisany do ścieżki 
-		Schema::create($tblName, function($table){$table->string('method', 255);});  // Kontroler przypisany do ścieżki 
-		Schema::create($tblName, function($table){$table->string('parameters', 255);});  // ewentualne parametry w formacie json
+		Schema::table($tblName, function($table){$table->string('type', 255);});  // Typ nawigacji (patrz config - website_navigations.php)
+		Schema::table($tblName, function($table){$table->string('controller', 255);});  // Kontroler przypisany do ścieżki 
+		Schema::table($tblName, function($table){$table->string('method', 255);});  // Kontroler przypisany do ścieżki 
+		Schema::table($tblName, function($table){$table->string('parameters', 255);});  // ewentualne parametry w formacie json
 		Schema::table($tblName, function($table){$table->primary(['path'], 'tkey2');});
 
 	}
