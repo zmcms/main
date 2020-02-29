@@ -6,20 +6,20 @@ return [
 	 */
 	'data_getters'=>[
 		'head'=>[
-			zmcms_get_initial_head_data($theme = 'zmcms'),
+			// zmcms_get_initial_head_data($theme = 'zmcms'),
 		],
 		'nav'=>[
 			'main'=>[
-				zmcms_website_navigations_frontend($position = 'main', $parent = null),
+				// zmcms_website_navigations_frontend($position = 'main', $parent = null),
 			],
 			'footer'=>[
-				zmcms_website_navigations_frontend($position = 'footer', $parent = null),
+				// zmcms_website_navigations_frontend($position = 'footer', $parent = null),
 			],
 			'left'=>[
-				zmcms_website_navigations_frontend($position = 'main', $parent = null)
+				// zmcms_website_navigations_frontend($position = 'main', $parent = null)
 			],
 			'right'=>[
-				zmcms_website_navigations_frontend($position = 'right', $parent = null),
+				// zmcms_website_navigations_frontend($position = 'right', $parent = null),
 			],
 		],
 	],

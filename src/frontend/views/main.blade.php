@@ -19,7 +19,7 @@
 	<meta charset="UTF-8" >
 	<link rel="stylesheet" type="text/css" href="{{$head['stylesheet']}}" >
     <link rel="icon" type="image/png" href="{{$head['icon']}}" >
-    <script type="text/javascript" src="{{$head['script']}}"></script>
+    <script type="text/javascript" src="{{$head['script'] ?? null }}"></script>
 	<script>window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?></script>
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
