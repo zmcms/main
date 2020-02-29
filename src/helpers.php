@@ -1,4 +1,23 @@
 <?php
+function zmcms_get_initial_head_data($theme = 'zmcms'){
+	return [
+		'title'		=> 'value',
+		'keywords'		=> 'value',
+		'description'	=> 'value',
+		'canonical'		=> 'value',
+		'og:title'		=> 'value',
+		'og:type'		=> 'value',
+		'og:url'		=> 'value',
+		'og:image'		=> 'value',
+		'og:description'=> 'value',
+		'og:locale'		=> 'value',
+		'language'		=> 'value',
+		'stylesheet'	=> 'value',
+		'icon'			=> 'value',
+	];
+}
+
+
 function zmcms_html_header($data){
 	$src=''."/n";
 	if(isset($data['html']['head']['language'])) $src.='<meta name="language" content="'.$data['html']['head']['language'].'" />'."/n";
@@ -25,31 +44,6 @@ function zmcms_html_js($data){
 	return $src;
 }
 
-'
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="csrf-token" content="gIezTQhUc3uSQBXDYZ9JuaNfjUfg9btzh6IDMN9J">
-	<meta charset="UTF-8" />
-	
-	<link rel="stylesheet" type="text/css" href="https://vando.pl/themes/vando/css/main.css">
-	<link rel="stylesheet" type="text/css" href="https://vando.pl/themes/vando/css/frontend.css">
-	
-	<link rel="stylesheet" href="https://vando.pl/themes/vando/css/slider.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
-    
-    <link rel="icon" type="image/png" href="https://vando.pl/themes/vando/media/site/icon.png" />
-    <script type="text/javascript" src="https://vando.pl/themes/vando/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://vando.pl/themes/vando/js/magnific-popupt-1.1.0.js"></script>
-    <script type="text/javascript" src="https://vando.pl/themes/vando/js/jquery.uploadfile.min.js"></script>
-    <script type="text/javascript" src="https://vando.pl/themes/vando/js/main.js"></script>
-	<script>window.Laravel = {"csrfToken":"gIezTQhUc3uSQBXDYZ9JuaNfjUfg9btzh6IDMN9J"}</script>
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
-';
-
 /**
  * 
 	727416244: +13,54
@@ -67,4 +61,7 @@ function zmcms_html_js($data){
 	457,25 
 
  */
+
+
+
 

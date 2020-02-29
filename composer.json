@@ -8,13 +8,15 @@
 		}
 	],
 	"require": {
+		"matthiasmullie/minify":"*",
 		"zmcms/users":"*",
 		"zmcms/website_navigations":"*"
 	},
 	"autoload": {
             "psr-4": {
                 "Zmcms\\Main\\": ""
-            }
+            },
+            "files": ["src/helpers.php"]
     	},
 	"extra": {
     		"laravel": {
