@@ -22,7 +22,7 @@ foreach($zmcms_documents_defaults as $a){
 }
 
 $tblName=$tblNamePrefix.'zmcms_routes_table';
-foreach($website_navigations_positions_names as $a){
+foreach($zmcms_routes_table as $a){
 	DB::table($tblName)->insert([ 'path'=>$a['path'],'type'=>$a['type'],'controller'=>$a['controller'],'method'=>$a['method'],'parameters'=>$a['parameters'], ]);
 }
 
