@@ -17,7 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" >
 	<meta name="csrf-token" content="{{ csrf_token() }}" >
 	<meta charset="UTF-8" >
-	<link rel="stylesheet" type="text/css" href="{{$head['stylesheet']}}" >
+	{!! zmcms_html_css('themes/'.Config('zmcms.main.theme').'/frontend/css', $compress = true) !!}
     <link rel="icon" type="image/png" href="{{$head['icon']}}" >
     <script type="text/javascript" src="{{$head['script'] ?? null }}"></script>
 	<script>window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?></script>
@@ -28,9 +28,7 @@
 	@includeIf('themes.'.Config('frontend.theme_name').'.seo.google_script')
 	</head>
 <body>
-	<header>
-		
-	</header>
 @yield('content')
+{!! zmcms_html_js('themes/'.Config('zmcms.main.theme').'/frontend/js', true) !!}
 </body>
 </html>

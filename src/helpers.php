@@ -33,15 +33,46 @@ function zmcms_html_header($data){
 	if(isset($data['html']['head']['og:locale'])) $src.='<meta name="description" content="'.$data['html']['head']['og:locale'].'">'."/n";
 	return $src;
 };
-function zmcms_html_css($data){
-	$src=''."/n";
-	if(isset($data['html']['head']['stylesheet'])) $src.='<link rel="stylesheet" type="text/css" href="'.$data['html']['head']['stylesheet'].'">'."/n";
+
+function zmcms_html_css($d, $compress = false){
+		$src = '';
+	$js_files = array_diff(scandir($d), array('..', '.'));
+	if(!$compress){
+		foreach($js_files as $f)
+			$src.='<script src="/'.$d.'/'.$f.'"></script>'."\n\t";
+	}else{
+		$sourcePath = '/path/to/source/css/file.css';
+		$minifier = new MatthiasMullie\Minify\CSS();
+		foreach($js_files as $f)
+			$minifier->add($d.'/'.$f);
+		
+		$minifiedPath = 'minified.js';
+		$minifier->minify($minifiedPath);
+		$src.='<script src="/minified.js"></script>'."\n\t";
+	}
 	return $src;
 }
-function zmcms_html_js($data){
-	$src=''."/n";
-	if(isset($data['html']['head']['javascript'])) $src.='<script src="'.$data['html']['head']['javascript'].'"></script>'."/n";
+
+
+function zmcms_html_js($d, $compress = false){
+	// return $d;
+	$src = '';
+	$js_files = array_diff(scandir($d), array('..', '.'));
+	if(!$compress){
+		foreach($js_files as $f)
+			$src.='<script src="/'.$d.'/'.$f.'"></script>'."\n\t";
+	}else{
+		$sourcePath = '/path/to/source/css/file.css';
+		$minifier = new MatthiasMullie\Minify\JS();
+		foreach($js_files as $f)
+			$minifier->add($d.'/'.$f);
+		
+		$minifiedPath = 'minified.js';
+		$minifier->minify($minifiedPath);
+		$src.='<script src="/minified.js"></script>'."\n\t";
+	}
 	return $src;
+
 }
 
 /**
@@ -54,11 +85,7 @@ function zmcms_html_js($data){
 	Grażka i Gabryś: 25,00 + 25,00 + 4,92 +21,5 = 54,92+21,5= 76,42
 	Tetiana: 47,85 + 25 + 25 +159,44=97,85+159,44 = 257,29 zł
 	
-	123,54
-	 76,42
-	257,29
-	======
-	457,25 
+	Dawid: 200,00 zł.
 
  */
 
