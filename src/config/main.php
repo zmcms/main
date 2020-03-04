@@ -10,5 +10,6 @@ return [
 	 * Nazwa aplikacji
 	 */
 	'name' => 'ZMCMS',
+	'backend_prefix' => 'dD34',
 
 ];

@@ -39,16 +39,17 @@ function zmcms_html_css($d, $compress = false){
 	$js_files = array_diff(scandir($d), array('..', '.'));
 	if(!$compress){
 		foreach($js_files as $f)
-			$src.='<script src="/'.$d.'/'.$f.'"></script>'."\n\t";
+			$src.='<link rel="stylesheet" type="text/css" href="/'.$d.'/'.$f.'">'."\n\t";
 	}else{
 		$sourcePath = '/path/to/source/css/file.css';
 		$minifier = new MatthiasMullie\Minify\CSS();
 		foreach($js_files as $f)
 			$minifier->add($d.'/'.$f);
 		
-		$minifiedPath = 'minified.js';
+		$minifiedPath = 'minified.css';
 		$minifier->minify($minifiedPath);
-		$src.='<script src="/minified.js"></script>'."\n\t";
+		$src.='<link rel="stylesheet" type="text/css" href="/minified.css">';
+		// $src.='<script src=""></script>'."\n\t";
 	}
 	return $src;
 }
