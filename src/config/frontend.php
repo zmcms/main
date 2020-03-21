@@ -1,8 +1,23 @@
 <?php
 $d=DIRECTORY_SEPARATOR;
+/**
+ * NIE DOTYKAĆ PONIŻSZYCH DWÓCH WERSÓW
+ */
+if(function_exists('base_path'))
 $mod_path = base_path().DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'zmcms'.DIRECTORY_SEPARATOR;
+
 return [
-	'database_default'=>	'zmcms',
+	/**
+	 * DOMYŚLNA BAZA DANYCH APLIKACJI
+	 * W przyszłości system będzie mógł przełączać się pomiędzy lustrzanymi bazami.
+	 * W przypadku awarii bazy podstawowej system automatycznie przełączy się na 
+	 * bazę z klucza 'database_mirror'.
+	 */
+	// 'database_main'=>	'zmcms', // 
+	/**
+	 * ZAPASOWA BAZA DANYCH APLIKACJI
+	 */
+	// 'database_mirror'=>	'zmcms',
 	/**
 	 * Poniżej nazwa "tematu", "skórki" itp.
 	 */
