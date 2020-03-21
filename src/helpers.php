@@ -66,9 +66,10 @@ function zmcms_config_file($config_name, $arr=[]){
 
 function zmcms_html_css($d, $compress = false){
 		$src = '';
-	$js_files = array_diff(scandir($d), array('..', '.'));
+	$js_files = array_diff(scandir($d), array('..', '.', '*.zip'));
 	if(!$compress){
 		foreach($js_files as $f)
+			$f=str_replace('.zip', '', $f);
 			$src.='<link rel="stylesheet" type="text/css" href="/'.$d.'/'.$f.'">'."\n\t";
 	}else{
 		$sourcePath = '/path/to/source/css/file.css';
@@ -88,9 +89,10 @@ function zmcms_html_css($d, $compress = false){
 function zmcms_html_js($d, $compress = false){
 	// return $d;
 	$src = '';
-	$js_files = array_diff(scandir($d), array('..', '.'));
+	$js_files = array_diff(scandir($d), array('..', '.', '*.zip'));
 	if(!$compress){
 		foreach($js_files as $f){
+			$f=str_replace('.zip', '', $f);
 			if(is_file($d.'/'.$f))
 				$src.='<script src="/'.$d.'/'.$f.'"></script>'."\n\t";
 		}
@@ -134,21 +136,3 @@ function language($lang = null){
 function ___($key, $lang = null, $dir = null, $format = 'json'){
 	return 'przeciążenie';
 }
-
-/**
- * 
-	727416244: +13,54
-	519329510: +4,92
-	533137611: +159,44
-	
-	Kamil: 110,00+13,54 = 123,54
-	Grażka i Gabryś: 25,00 + 25,00 + 4,92 +21,5 = 54,92+21,5= 76,42
-	Tetiana: 47,85 + 25 + 25 +159,44=97,85+159,44 = 257,29 zł
-	
-	Dawid: 200,00 zł.
-
- */
-
-
-
-
