@@ -26,6 +26,7 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'frontend\routes'.DIRECTORY_SEPARATOR.'web.php');
 		$this->loadMigrationsFrom(__DIR__.'/migrations');
 		$this->publishes([
+			__DIR__.'/lang' => base_path('config/zmcms/lang'),
 			__DIR__.'/backend/views' => base_path('resources/views/themes/zmcms/backend'),
 			__DIR__.'/frontend/views' => base_path('resources/views/themes/zmcms/frontend'),
 			__DIR__.'/config' => base_path('config/zmcms'),

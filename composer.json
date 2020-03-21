@@ -9,8 +9,10 @@
 	],
 	"require": {
 		"matthiasmullie/minify":"*",
+		"intervention/image":"*",
 		"zmcms/users":"*",
-		"zmcms/website_navigations":"*"
+		"zmcms/website_navigations":"*",
+		"laravel/helpers":"*"
 	},
 	"autoload": {
             "psr-4": {

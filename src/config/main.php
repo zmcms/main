@@ -11,5 +11,16 @@ return [
 	 */
 	'name' => 'ZMCMS',
 	'backend_prefix' => 'dD34',
+	/**
+	 * Ustawienia językowwe aplikacji
+	 */
+	'lang_default'	=>	'pl',
+	'lang_available'	=>	[
+		'pl' =>['name' => 'polski', 'iso'=>'pl', 'flag'=>null, ],
+		'en' =>['name' => 'English', 'iso'=>'en', 'flag'=>null, ],
+		'es' =>['name' => 'Espaniol', 'iso'=>'es', 'flag'=>null, ],
+		'de' =>['name' => 'Deutche', 'iso'=>'de', 'flag'=>null, ],
+	],
+	'lang_directory'=>'resources.lang',
 
 ];

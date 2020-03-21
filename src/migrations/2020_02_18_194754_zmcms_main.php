@@ -21,6 +21,11 @@ class ZmcmsMain extends Migration{
 		Schema::table($tblName, function($table){$table->string('parameters', 255);});  // ewentualne parametry w formacie json
 		Schema::table($tblName, function($table){$table->primary(['path'], 'tkey2');});
 
+		$tblName=$tblNamePrefix.'zmcms_translations';
+		Schema::create($tblName, function($table){$table->string('content', 255);});  // Treść do przetłumaczenia
+		Schema::table ($tblName, function($table){$table->string('langs_id', 5);}); // pl, en, ru itp. Język, na jki tłumaczymy
+		Schema::create($tblName, function($table){$table->string('translated', 255);});  // Treść przetłumaczona
+
 	}
 	public function down(){
 	}

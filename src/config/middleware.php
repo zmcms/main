@@ -1,15 +1,23 @@
 <?php
 return [
 	'frontend'	=>[
-		\Illuminate\Session\Middleware\StartSession::class,
 		\App\Http\Middleware\EncryptCookies::class,
-		\App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
 		\Zmcms\Users\Frontend\Middleware\ZmcmsUsers::class,
 	],
 	'backend'	=>[
-		\Illuminate\Session\Middleware\StartSession::class,
-		\App\Http\Middleware\EncryptCookies::class,
-		\App\Http\Middleware\VerifyCsrfToken::class,
-		\Zmcms\Users\Backend\Middleware\ZmcmsUsers::class,
+		    \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Zmcms\Users\Backend\Middleware\ZmcmsUsers::class,
 	],
 ];
