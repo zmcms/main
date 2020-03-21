@@ -25,6 +25,30 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'backend\routes'.DIRECTORY_SEPARATOR.'console.php');
 		$this->loadRoutesFrom(__DIR__.DIRECTORY_SEPARATOR.'frontend\routes'.DIRECTORY_SEPARATOR.'web.php');
 		$this->loadMigrationsFrom(__DIR__.'/migrations');
+
+		/**
+		 * ROZPAKOWYWANIE ZIPÓW PRZED PUBLIKACJĄ
+		 */
+		if(is_file(__DIR__.'/backend/js/filemanager.zip')){
+			$zip = new \ZipArchive;
+			$res = $zip->open(__DIR__.'/backend/js/filemanager.zip');
+			if ($res === TRUE) {
+			    $zip->extractTo(__DIR__.'/backend/js/filemanager/');
+			    $zip->close();
+			}
+			unlink(__DIR__.'/backend/js/filemanager.zip');
+			unset($zip);			
+		}
+		if(is_file(__DIR__.'/backend/js/tinymce.zip')){
+			$zip = new \ZipArchive;
+			$res = $zip->open(__DIR__.'/backend/js/tinymce.zip');
+			if ($res === TRUE) {
+			    $zip->extractTo(__DIR__.'/backend/js/tinymce/');
+			    $zip->close();
+			}
+			unlink(__DIR__.'/backend/js/tinymce.zip');
+			unset($zip);
+		}
 		$this->publishes([
 			__DIR__.'/lang' => base_path('config/zmcms/lang'),
 			__DIR__.'/backend/views' => base_path('resources/views/themes/zmcms/backend'),
@@ -35,6 +59,7 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 			__DIR__.'/backend/js' => base_path('public/themes/zmcms/backend/js'),
 			__DIR__.'/frontend/js' => base_path('public/themes/zmcms/frontend/js'),
 		]);
+
 		View::addLocation(__DIR__.DIRECTORY_SEPARATOR.'/backend/views');
 		View::addLocation(__DIR__.DIRECTORY_SEPARATOR.'/frontend/views');
 	}
