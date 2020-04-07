@@ -15,7 +15,12 @@ Route::middleware(['BackendUser'])->group(function () use ($prefix){
 	Route::post($prefix.'/zmcms_main_set_logo_img', 'Zmcms\Main\Backend\Controllers\ZmcmsMainController@zmcms_main_set_logo_img')->name('settings_logo');
 	Route::get($prefix.'/home/settings/seo_sem_frm', 'Zmcms\Main\Backend\Controllers\ZmcmsMainController@seosem_default_frm')->name('seosem_default');
 	Route::post($prefix.'/zmcms_main_seo_sem_frm_update', 'Zmcms\Main\Backend\Controllers\ZmcmsMainController@zmcms_main_seo_sem_frm_update')->name('seosem_default');
-	Route::get($prefix.'/home/settings/website_themes_frm', 'Zmcms\Main\Backend\Controllers\ZmcmsMainController@website_themes_frm')->name('website_themes');
+	Route::get($prefix.'/home/settings/website_themes_frm', 
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@website_themes_frm')
+		->name('website_themes');
+	Route::get($prefix.'/home/settings/zmcms_main_new_theme_create/{new_theme_name?}', 
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@zmcms_main_new_theme_create')
+		->name('website_themes');
 
 	
 

@@ -17,9 +17,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" >
 	<meta name="csrf-token" content="{{ csrf_token() }}" >
 	<meta charset="UTF-8" >
-	{!! zmcms_html_css('themes/'.Config('zmcms.main.theme').'/frontend/css', $compress = true) !!}
+	{!! zmcms_html_css('themes/'.Config('zmcms.main.theme').'/frontend/css', $compress = false) !!}
     <link rel="icon" type="image/png" href="{{$head['icon']}}" >
-    <script type="text/javascript" src="{{$head['script'] ?? null }}"></script>
 	<script>window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?></script>
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -28,7 +27,8 @@
 	@includeIf('themes.'.Config('frontend.theme_name').'.seo.google_script')
 	</head>
 <body>
-@yield('content')
-{!! zmcms_html_js('themes/'.Config('zmcms.main.theme').'/frontend/js', true) !!}
+	{{zmcms_website_navigations_frontend($position = 'main', $parent = null, $to_file=false)}}
+	@yield('content')
+{!! zmcms_html_js('themes/'.Config('zmcms.main.theme').'/frontend/js', false) !!}
 </body>
 </html>

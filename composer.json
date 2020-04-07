@@ -8,11 +8,12 @@
 		}
 	],
 	"require": {
+		"laravel/helpers":"*",
 		"matthiasmullie/minify":"*",
 		"intervention/image":"*",
 		"zmcms/users":"*",
 		"zmcms/website_navigations":"*",
-		"laravel/helpers":"*"
+		"zmcms/website_articles":"*"
 	},
 	"autoload": {
             "psr-4": {

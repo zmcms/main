@@ -12,7 +12,7 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 			.'* Odpowiednie opcje znajdziesz w sekcji "Ustawienia"'."\n"
 			.'**/'."\n";
 	public function zmcms_main_home(){		
-		return view('themes.zmcms.backend.home');
+		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.home');
 	}
 
 	/**
@@ -115,7 +115,8 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 			}
 			@rmdir($tst);
 			// if(file_exists(base_path().'/public/'.$config_media['logo'])) unlink(base_path().'/public/'.$config_media['logo']));
-			$image->save(base_path().'/public/'.$config_media['logo'], 80);
+			$image->save(base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/site/logo.png', 80);
+			$config_media['logo'] = 'themes/'.Config('zmcms.frontend.theme_name').'/media/site/logo.png';
 		}
 		if(strlen($data['favicon'])!=0){
 
@@ -131,8 +132,11 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 			}
 			@rmdir($tst);
 			// if(file_exists(base_path().'/public/'.$config_media['icon'])) unlink(base_path().'/public/'.$config_media['icon']));
-			$image->save(base_path().'/public/'.$config_media['icon'], 80);
+			$image->save(base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/site/icon.png', 80);
+			$config_media['icon'] = 'themes/'.Config('zmcms.frontend.theme_name').'/media/site/icon.png';
+			
 		}
+		zmcms_config_file('media', $config_media);
 
 		return 'ok';
 	}
@@ -295,39 +299,63 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 	}
 	public function website_themes_frm(){
 		$data = [];
-		// return view(, compact('data'));
 		$installed = array_diff(scandir(base_path().'/public/themes/'), array('..', '.'));
 		foreach($installed as $f){
-			// if(is_dir($installed.$f))
 				$data[]=$f;
 		}
 		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.zmcms_main_themes_admin', compact('data'));
 	}
+	/**
+	 * KOPIOWANIE PLIKÓW TWORZĄCYCH MOTYW GRAFICZNY SERWISU INTERNETOWEGO
+	 */
+	public function zmcms_main_new_theme_create($new_theme_name = null, $src_theme_name = null){
+		ini_set('max_execution_time', '0');
+		if($src_theme_name == null) $src_theme_name = Config('zmcms.frontend.theme_name');
+		$new_theme_name = str_slug($new_theme_name);
+		$d=DIRECTORY_SEPARATOR;
+		/**
+		 * GDY NIE PODANO NAZWY
+		 */
+		if($new_theme_name == null || $new_theme_name == '')
+			return json_encode([
+				'result'	=>	'error',
+				'code'		=>	'cant_copy_theme_name_empty',
+				'msg' 		=>	___('Nazwa nowego motywu nie może być pusta.'),
+			]);
+		/**
+		 * GDY NAZWA ISTNIEJE
+		 */
+		if(file_exists(base_path().$d.'public'.$d.'themes'.$d.$new_theme_name))
+			return json_encode([
+				'result'	=>	'error',
+				'code'		=>	'cant_copy_theme_name_exists',
+				'msg' 		=>	___('Nazwa nowego motywu jest już wykorzystana.'),
+			]);
+		/**
+		 * KOPIOWANIE
+		 */
+		//KATALOG PUBLIC
+		\File::copyDirectory(
+			base_path().$d.'public'.$d.'themes'.$d.$src_theme_name,
+			base_path().$d.'public'.$d.'themes'.$d.$new_theme_name
+		);
+		//KATALOG Z WIDOKAMI
+		\File::copyDirectory(
+			base_path().$d.'resources'.$d.'views'.$d.'themes'.$d.$src_theme_name,
+			base_path().$d.'resources'.$d.'views'.$d.'themes'.$d.$new_theme_name
+		);
+		//KATALOG Z KONFIGURACJĄ
+		\File::copyDirectory(
+			base_path().$d.'config'.$d.$src_theme_name,
+			base_path().$d.'config'.$d.$new_theme_name
+		);
+		/**
+		 * KOPIOWANIE SKOŃCZONE
+		 */
+			return json_encode([
+				'result'	=>	'ok',
+				'code'		=>	'ok',
+				'msg' 		=>	___('Utworzono nowy motyw serwisu. Aby go aktywować, ustaw opcję w pliku "/config/zmcms/frontend.php": <br />[...]<br />\'theme_name\'=>\''.str_slug($new_theme_name).'\'<br />[...]'),
+			]);
+	}
 }
-
-/**
- * <div class="msg">Array
-(
-    [_token] =&gt; v9pdxuT9t3YXilhPXtDn2cg32TvVk2WU7fQY4xn6
-    [departments] =&gt; Array
-        (
-            [1] =&gt; Array
-                (
-                    [key] =&gt; 1
-                    [localisation_name] =&gt; 
-                    [phone] =&gt; 
-                    [mail] =&gt; 
-                    [addr_l1] =&gt; 
-                    [addr_l2] =&gt; 
-                    [zip_code] =&gt; 
-                    [locality] =&gt; 
-                    [province] =&gt; 
-                    [country] =&gt; 
-                    [countryID] =&gt; 
-                )
-
-        )
-
-)
-</div>
- */

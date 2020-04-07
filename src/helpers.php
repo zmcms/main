@@ -1,19 +1,19 @@
 <?php
 function zmcms_get_initial_head_data($theme = 'zmcms'){
 	return [
-		'title'		=> 'value',
-		'keywords'		=> 'value',
-		'description'	=> 'value',
-		'canonical'		=> 'value',
-		'og:title'		=> 'value',
-		'og:type'		=> 'value',
-		'og:url'		=> 'value',
-		'og:image'		=> 'value',
-		'og:description'=> 'value',
-		'og:locale'		=> 'value',
-		'language'		=> 'value',
-		'stylesheet'	=> 'value',
-		'icon'			=> 'value',
+		'title'			 => Config($theme.'.seosem.head.title'),
+		'keywords'		 => Config($theme.'.seosem.head.keywords'),
+		'description'	 => Config($theme.'.seosem.head.description'),
+		'canonical'		 => Config($theme.'.seosem.head.canonical'),
+		'og:title'		 => Config($theme.'.seosem.og.title'),
+		'og:type'		 => Config($theme.'.seosem.og.type'),
+		'og:url'		 => Config($theme.'.seosem.og.url'),
+		'og:image'		 => Config($theme.'.seosem.og.image.image'),
+		'og:description' => Config($theme.'.seosem.og.description'),
+		'og:locale'		 => Config($theme.'.seosem.og.locale'),
+		'language'		 => Config($theme.'.seosem.language'),
+		'stylesheet'	 => Config($theme.'.seosem.stylesheet'),
+		'icon'			 => Config($theme.'.media.icon'),
 	];
 }
 
@@ -68,9 +68,10 @@ function zmcms_html_css($d, $compress = false){
 		$src = '';
 	$js_files = array_diff(scandir($d), array('..', '.', '*.zip'));
 	if(!$compress){
-		foreach($js_files as $f)
+		foreach($js_files as $f){
 			$f=str_replace('.zip', '', $f);
 			$src.='<link rel="stylesheet" type="text/css" href="/'.$d.'/'.$f.'">'."\n\t";
+		}
 	}else{
 		$sourcePath = '/path/to/source/css/file.css';
 		$minifier = new MatthiasMullie\Minify\CSS();
@@ -134,5 +135,33 @@ function language($lang = null){
  *           db - tłumaczenie pobierane jest z bazy danych
  */
 function ___($key, $lang = null, $dir = null, $format = 'json'){
-	return 'przeciążenie';
+	return __($key);
+}
+
+/**
+ * ZAPISUJE W WYBRANEJ LOKALIZACJI SERIĘ PLIKÓW GRAFICZNYCH
+ * W ROZMIARACH PODANYCH W PLIKU KONFIGURACYJNYM
+ */
+function zmcms_image_save($file, $target_directory, $file_name){
+	
+	$sizes = Config(Config('zmcms.frontend.theme_name').'.media.img.sizes');
+	// return Config(Config('zmcms.frontend.theme_name').'.media.img.sizes');
+	// return print_r($sizes, true);
+	$paths = [];
+	if(is_array($sizes))
+		foreach ($sizes as $size) {
+			if(!file_exists($target_directory.DIRECTORY_SEPARATOR.$size)){
+				@mkdir($target_directory.DIRECTORY_SEPARATOR.$size, 0777, true);		
+			}
+			$img = Intervention\Image\ImageManagerStatic::make($file)->resize($size, null, function ($constraint) {$constraint->aspectRatio();})
+			->save($target_directory.DIRECTORY_SEPARATOR.$size.DIRECTORY_SEPARATOR.$file_name);
+			// $img->backup();
+			// $img->reset();
+			 $p =str_replace (base_path().DIRECTORY_SEPARATOR.'public', '', $target_directory.DIRECTORY_SEPARATOR.$size.DIRECTORY_SEPARATOR.$file_name);
+			$paths[$size]=str_replace(
+				DIRECTORY_SEPARATOR, '/',
+				$p	
+			);
+		}
+	return $paths;
 }
