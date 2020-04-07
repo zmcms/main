@@ -98,6 +98,7 @@ form .msg.error{color: #444; }
 .control_subbelt_belt{text-align: left; background-color: #888 }
 .control_belt *,
 .control_subbelt_belt *{color: #444;}
+.control_belt a span{color: #fff}
 button [class*="fa"]{color: #fff}
 .control_belt button,
 .control_subbelt_belt button{width: auto; color: #fff}

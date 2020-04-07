@@ -33,22 +33,28 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 			$zip = new \ZipArchive;
 			$res = $zip->open(__DIR__.'/backend/js/filemanager.zip');
 			if ($res === TRUE) {
-			    $zip->extractTo(__DIR__.'/backend/js/filemanager/');
+			    $zip->extractTo(__DIR__.'/backend/js/');
 			    $zip->close();
 			}
 			unlink(__DIR__.'/backend/js/filemanager.zip');
 			unset($zip);			
 		}
+		//TWORZĘ KATALOGI MEDIA DLA FILEMANAGERA
+		@mkdir(base_path('public/themes/zmcms/media'), 0777, true);
+
+
 		if(is_file(__DIR__.'/backend/js/tinymce.zip')){
 			$zip = new \ZipArchive;
 			$res = $zip->open(__DIR__.'/backend/js/tinymce.zip');
 			if ($res === TRUE) {
-			    $zip->extractTo(__DIR__.'/backend/js/tinymce/');
+			    $zip->extractTo(__DIR__.'/backend/js/');
 			    $zip->close();
 			}
 			unlink(__DIR__.'/backend/js/tinymce.zip');
 			unset($zip);
 		}
+		
+
 		$this->publishes([
 			__DIR__.'/lang' => base_path('config/zmcms/lang'),
 			__DIR__.'/backend/views' => base_path('resources/views/themes/zmcms/backend'),

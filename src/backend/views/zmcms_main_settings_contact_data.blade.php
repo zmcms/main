@@ -10,10 +10,10 @@
             <input class="micro12 mini10" type="text" name="headquarters[business_name]" value="{{$data['headquarters']['business_name'] ?? null}}" placeholder="Nazwa Firmy"></label>
         <label class="micro12 mini6">
             <span class="micro12 mini4">Główny telefon</span>
-            <input class="micro12 mini8" type="text" name="headquarters[krs]" value="{{$data['headquarters']['phone'] ?? null}}" placeholder="Główny telefon"></label>
+            <input class="micro12 mini8" type="text" name="headquarters[phone]" value="{{$data['headquarters']['phone'] ?? null}}" placeholder="Główny telefon"></label>
         <label class="micro12 mini6">
             <span class="micro12 mini4">Główny e-mail</span>
-            <input class="micro12 mini8" type="text" name="headquarters[krs]" value="{{$data['headquarters']['email'] ?? null}}" placeholder="Główny e-mail"></label>
+            <input class="micro12 mini8" type="text" name="headquarters[mail]" value="{{$data['headquarters']['email'] ?? null}}" placeholder="Główny e-mail"></label>
         <label class="micro12 mini6 small4">
             <span class="micro12 mini4">NIP</span>
             <input class="micro12 mini8" type="text" name="headquarters[vat_id]" value="{{$data['headquarters']['vat_id'] ?? null}}" placeholder="NIP"></label>
