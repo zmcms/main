@@ -17,7 +17,14 @@
 	},
 	"autoload": {
             "psr-4": {
-                "Zmcms\\Main\\": ""
+                "Zmcms\\Main\\Backend\\Controllers\\":"src/backend/controllers/",
+		"Zmcms\\Main\\Backend\\Middleware\\":"src/backend/middleware/",
+		"Zmcms\\Main\\Backend\\Routes\\":"src/backend/routes/",
+		"Zmcms\\Main\\Frontend\\Controllers\\":"src/frontend/controllers/",
+		"Zmcms\\Main\\Frontend\\Middleware\\":"src/frontend/middleware/",
+		"Zmcms\\Main\\Frontend\\Routes\\":"src/frontend/routes/",
+		"Zmcms\\Main\\Migrations\\":"src/migrations/",
+		"Zmcms\\Main\\":"src/"
             },
             "files": ["src/helpers.php"]
     	},
