@@ -32,7 +32,19 @@ return [
 	 * Druga kolumna to tablica parametrów wywołaniafunkcji
 	 */
 	'home_page_modules'	=>	[
-		
+		/********************************************************************************************
+		* PRZYKŁADOWE WYWOŁANIE KLASY NA STRONIE STARTOWEJ
+		* ===========================================================================================
+		* [	
+		* 	'Zmcms\WebsiteNavigations\Frontend\Controllers\ZmcmsWebsiteNavigationsController@home', 
+		* 	[
+		* 		'position'=>'start_page', 
+		* 		'q'=>6, 
+		* 		'view'=>'themes.autofutura.frontend.home.parts.main_offer',
+		* 	],
+		* ],
+		* ===========================================================================================
+		**/
 	],
 	
 ];
