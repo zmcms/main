@@ -1,4 +1,5 @@
 <?php
+// echo 'offer<br />';
 $prefix = Config('zmcms.main.backend_prefix');
 Route::middleware(['BackendUser'])->group(function () use ($prefix){
 	Route::get($prefix.'/home', 'Zmcms\Main\Backend\Controllers\ZmcmsMainController@zmcms_main_home')->name('backend_home');
@@ -22,6 +23,21 @@ Route::middleware(['BackendUser'])->group(function () use ($prefix){
 		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@zmcms_main_new_theme_create')
 		->name('website_themes');
 
+	Route::post($prefix.'/db/sort',
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@db_sort')
+		->name('db');
+	Route::post($prefix.'/db/filter',
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@db_filter')
+		->name('db');
+	Route::post($prefix.'/db/sort_delete',
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@sort_delete')
+		->name('db');
+	Route::get($prefix.'/main/rwd_image_src',
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@rwd_image_src')
+		->name('editor');
+	Route::post($prefix.'/main/rwd_image_src_process',
+		'Zmcms\Main\Backend\Controllers\ZmcmsMainController@rwd_image_src_process')
+		->name('editor');
 	
 
 });

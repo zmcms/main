@@ -11,8 +11,8 @@ $zmcms_documents_defaults = [
 ];
 
 $zmcms_routes_table=[
-	['path'=>'/', 		'type'=>'homepage', 		'controller'=>'Zmcms\Main\Frontend\Controllers\ZmcmsMainController', 'method'=>'homepage', 'parameters'=>'', ],
-	['path'=>'/kotakt', 'type'=>'static_pages', 	'controller'=>'Zmcms\Main\Frontend\Controllers\ZmcmsMainController', 'method'=>'static_pages', 'parameters'=>json_encode(['langs'=>'pl', 'view'=>'kontakt']), ],
+	['path'=>'/',  'parameters'=>'', ],
+	['path'=>'/kotakt', 'parameters'=>json_encode(['langs'=>'pl', 'view'=>'kontakt']), ],
 ];
 
 $tblNamePrefix=(Config('database.prefix')??'');
@@ -23,7 +23,7 @@ foreach($zmcms_documents_defaults as $a){
 
 $tblName=$tblNamePrefix.'zmcms_routes_table';
 foreach($zmcms_routes_table as $a){
-	DB::table($tblName)->insert([ 'path'=>$a['path'],'type'=>$a['type'],'controller'=>$a['controller'],'method'=>$a['method'],'parameters'=>$a['parameters'], ]);
+	DB::table($tblName)->insert([ 'path'=>$a['path'], 'parameters'=>$a['parameters'], ]);
 }
 
 

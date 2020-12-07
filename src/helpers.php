@@ -64,19 +64,20 @@ function zmcms_config_file($config_name, $arr=[]){
 	
 }
 
-function zmcms_html_css($d, $compress = false){
+function zmcms_html_css($d, $compress = false, $not = []){
 		$src = '';
 	$js_files = array_diff(scandir($d), array('..', '.', '*.zip'));
 	if(!$compress){
 		foreach($js_files as $f){
 			$f=str_replace('.zip', '', $f);
-			$src.='<link rel="stylesheet" type="text/css" href="/'.$d.'/'.$f.'">'."\n\t";
+			if(!in_array($f, $not)) $src.='<link rel="stylesheet" type="text/css" href="/'.$d.'/'.$f.'">'."\n\t";
 		}
 	}else{
 		$sourcePath = '/path/to/source/css/file.css';
 		$minifier = new MatthiasMullie\Minify\CSS();
 		foreach($js_files as $f)
-			$minifier->add($d.'/'.$f);
+			if(!in_array($f, $not)) 
+				$minifier->add($d.'/'.$f);
 		
 		$minifiedPath = 'minified.css';
 		$minifier->minify($minifiedPath);
@@ -164,4 +165,61 @@ function zmcms_image_save($file, $target_directory, $file_name){
 			);
 		}
 	return $paths;
+}
+/**
+ * Pierwszy klucz tablicy asocjacyjnej
+ */
+
+if (!function_exists('array_key_first')) {
+    function array_key_first(array $arr) {
+        foreach($arr as $key => $unused) {
+            return $key;
+        }
+        return NULL;
+    }
+}
+
+/**
+ * $do - akcja do wykonania
+ * 'create' - tworzy parametry do sorwowania
+ * 'delete' - usuwa parametry do sorwowania
+ * 'toggle' - zamienia parametry do sorwowania (włącz, wyłącz)
+ * $params - tablica z parametrami do sortowania
+ * [
+ 		'set'=>[
+			['column1', 'direction1'],
+			['column2', 'direction2'],
+			...
+			['columnN', 'directionN'],
+ 		],
+ 	]
+ */
+function recordset_sort_data($do, $set, $params = []){
+	$data = [];
+	switch($do){
+		case 'create'	:{
+			if(Session::has('sorting')){
+				$data = Session::get('sorting');
+				$data[$set]=$params;
+				Session::put('sorting', $data);	
+				return true;
+			}else{
+				$data[$set]=$params;
+				Session::put('sorting', $data);	
+			}
+			break;
+			
+		}
+		case 'delete'	:{
+			$data = Session::get('sorting');
+			unset($data[$set]);
+			Session::put('sorting', $data);
+			return true;
+			break;
+		}
+		case 'get'		:{
+			return Session::get('sorting')[$set];
+			break;
+		}
+	}
 }

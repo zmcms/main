@@ -6,7 +6,7 @@ form label>span{display: inline-block;margin: 0;float: left;background-color: #e
 form label>input,
 form label>select,
 form label>textarea,
-form label>button{float: left;border: solid 1px #ddd;padding: .5rem;margin: 0;height:  2.5rem;color: #333;}
+form label>button{float: left;border: solid 1px #ddd;padding: .5rem;margin: 0;height:  2.5rem;/* color: #333; */}
 form label>input{; border-left: none}
 form>fieldset{width: 100%}
 form>fieldset>legend{display: inline-block; margin-left: 0; float: left;background-color: #ccc; width: 100%; text-align: left;padding: .6rem; font-weight: bold}
@@ -18,6 +18,12 @@ html>body>header{
 	background-color: #000;
 	padding: .5rem;
 	margin: 0;
+}
+.tox-fullscreen{
+
+	width: 100% !important;
+	height: 100% !important;
+
 }
 form label>strong{display: inline; border: none;}
 html>body>header *{
@@ -95,9 +101,10 @@ form .msg.error{color: #444; }
 }
 .control_belt,
 .control_subbelt_belt{display: inline-block; float: left; width: 100%; background-color: #444; padding:.5rem;text-align: right; color: #fff}
-.control_subbelt_belt{text-align: left; background-color: #888 }
+.control_subbelt_belt{text-align: right; background-color: #888 }
 .control_belt *,
 .control_subbelt_belt *{color: #444;}
+.control_subbelt_belt input{padding: .5rem; border: solid 1px #444; }
 .control_belt a span{color: #fff}
 button [class*="fa"]{color: #fff}
 .control_belt button,
@@ -181,7 +188,11 @@ label.strong{background-color: #aaa !important;}
 	.micro-margin9 { margin-left: 75% !important; }
 	.micro-margin10 { margin-left: 83.33333% !important; }
 	.micro-margin11 { margin-left: 91.66667% !important; }
-	.micro-margin12 { margin-left: 100% !important; }	
+	.micro-margin12 { margin-left: 100% !important; }
+	.pagination{display: inline-block; width: 100%;text-align: center; padding: .5rem}
+	.pagination li{display: inline-block; border: solid 1px; padding: 1rem; border-radius: 50%; min-width: 3rem; min-height: 3rem;background-color: #ddd}
+	.pagination .active{background-color: green; color: #fff}
+	.pagination .disabled{background-color: rgba(0,0,0,0); border: solid 1px #ccc}
 }
 @media only screen and (min-width: 800px){
 	.hide_pc{display: initial !important;}

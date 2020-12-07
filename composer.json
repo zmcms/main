@@ -8,16 +8,16 @@
 		}
 	],
 	"require": {
-		"laravel/helpers":"*",
 		"matthiasmullie/minify":"*",
 		"intervention/image":"*",
 		"zmcms/users":"*",
 		"zmcms/website_navigations":"*",
-		"zmcms/website_articles":"*"
+		"zmcms/website_articles":"*",
+		"laravel/helpers":"*"
 	},
 	"autoload": {
             "psr-4": {
-                "Zmcms\\Main\\": "src/"
+                "Zmcms\\Main\\": ""
             },
             "files": ["src/helpers.php"]
     	},

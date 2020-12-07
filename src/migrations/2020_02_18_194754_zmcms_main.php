@@ -14,17 +14,20 @@ class ZmcmsMain extends Migration{
 		Schema::table($tblName, function($table){$table->primary(['name', 'context'], 'tkey1');});
 
 		$tblName=$tblNamePrefix.'zmcms_routes_table';
-		Schema::create($tblName, function($table){$table->string('path', 150);});  // ścieżka po adresie serwisu www
-		Schema::table($tblName, function($table){$table->string('type', 255);});  // Typ nawigacji (patrz config - website_navigations.php)
-		Schema::table($tblName, function($table){$table->string('controller', 255);});  // Kontroler przypisany do ścieżki 
-		Schema::table($tblName, function($table){$table->string('method', 255);});  // Kontroler przypisany do ścieżki 
-		Schema::table($tblName, function($table){$table->string('parameters', 255);});  // ewentualne parametry w formacie json
+		Schema::create($tblName, function($table){$table->string('path', 180);});  // ścieżka po adresie serwisu www
+		Schema::table($tblName, function($table){$table->string('parameters', 400);});  // ewentualne parametry w formacie json
 		Schema::table($tblName, function($table){$table->primary(['path'], 'tkey2');});
 
 		$tblName=$tblNamePrefix.'zmcms_translations';
 		Schema::create($tblName, function($table){$table->string('content', 255);});  // Treść do przetłumaczenia
-		Schema::table ($tblName, function($table){$table->string('langs_id', 5);}); // pl, en, ru itp. Język, na jki tłumaczymy
+		Schema::table ($tblName, function($table){$table->string('langs_id', 5);}); // pl, en, ru itp. Język, na jaki tłumaczymy
 		Schema::table($tblName, function($table){$table->string('translated', 255);});  // Treść przetłumaczona
+
+		$tblName=$tblNamePrefix.'zmcms_correspondence_register';
+		Schema::create($tblName, function($table){$table->string('token', 75);});  // Treść do przetłumaczenia
+		Schema::table ($tblName, function($table){$table->string('langs_id', 5);}); // pl, en, ru itp. Język, na jaki tłumaczymy
+		Schema::table ($tblName, function($table){$table->string('frm_id', 50);}); // Identyfikator formularza, jeżeli wiadomość przyszłe ze strony
+		Schema::table ($tblName, function($table){$table->text('content');}); // pl, en, ru itp. Język, na jki tłumaczymy
 
 	}
 	public function down(){

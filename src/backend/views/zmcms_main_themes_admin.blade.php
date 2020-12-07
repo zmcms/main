@@ -7,14 +7,16 @@
 	<legend>Zarządzaj motywami</legend>
 	<label class="micro12">
 		<span class="micro12 mini4">Utwórz nowy motyw</span>
-		<input class="micro12 mini6" type="text" id="txt_new_theme_create" name="theme_name" placeholder="Podaj kod motywu">
-		<button class="micro12 mini2" id="btn_new_theme_create">Utwórz</button>
+		<input class="micro12 mini6" type="text" name="headquarters[business_name]" value="" placeholder="Podaj kod motywu">
+		<button class="micro12 mini2" class="btn_new_theme_create">Utwórz</button>
 	</label>
 	</fieldset>
-	<div class="msg"></div>
 	<fieldset>
 		<legend>Zainstalowane motywy:</legend>
 		<pre>{{print_r($data, true)}}</pre>
 	</fieldset>
+	
+	
+	<div class="msg"></div>
 </form>
 @endsection

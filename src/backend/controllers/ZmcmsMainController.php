@@ -2,6 +2,7 @@
 namespace Zmcms\Main\Backend\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use Session;
 class ZmcmsMainController extends \App\Http\Controllers\Controller
 {	
 	private $txt =  "<?php\n"
@@ -358,4 +359,85 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 				'msg' 		=>	___('Utworzono nowy motyw serwisu. Aby go aktywować, ustaw opcję w pliku "/config/zmcms/frontend.php": <br />[...]<br />\'theme_name\'=>\''.str_slug($new_theme_name).'\'<br />[...]'),
 			]);
 	}
+
+
+	public function db_sort(Request $request){
+		$data = [];
+		$d = $request->all();
+		if(Session::has('sorting')){
+			$data = Session::get('sorting');
+		}
+		if(isset($data[$d['set']][$d['col']]))
+			$data[$d['set']][$d['col']]=($data[$d['set']][$d['col']]=='asc')?'desc':'asc';
+		else
+			$data[$d['set']][$d['col']]='asc';
+		Session::put('sorting', $data);
+		// return '<pre>'.print_r(Session::get('sorting'), true).'</pre>';
+	}
+
+	public function sort_delete(Request $request){
+		$data = [];
+		$d = $request->all();
+		if(Session::has('sorting'))
+			$data = Session::get('sorting');
+		if(isset($data[$d['set']]))
+			unset($data[$d['set']]);
+		Session::put('sorting', $data);
 }
+
+
+	public function db_filter(Request $request){
+		$x = [];
+		$d = $request->all();
+		$x[$d['set']] = $d['txt_filter']; 
+		Session::put('db_filters', $x);
+		// return '<pre color="fff">'.print_r(Session::get('db_filters'), true).'</pre>';
+		// return '<pre color="fff">'.print_r(Session::get('db_filters'), true).'</pre>';
+	}
+	/**
+	 * Formularz do wstawienia ibrazka RWD (<picture></picture>)
+	 */
+	public function rwd_image_src(Request $request){
+		$data = [];
+		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.zmcms_main_rwd_image_src_frm', compact('data'));
+	}
+	public function rwd_image_src_process(Request $request){
+		$str='<picture>'."\n";
+		$d=$request->all();
+		if( !((strlen(strip_tags($d['media_query_0']))  ==0 ) || ( strlen(strip_tags($d['img_0'])) ==0 )) ){$str.='<source media="'.$d['media_query_0'].'" srcset="'.$d['img_0'].'" />'."\n";}
+		if( !((strlen(strip_tags($d['media_query_1']))  ==0 ) || ( strlen(strip_tags($d['img_1'])) ==0 )) ){$str.='<source media="'.$d['media_query_1'].'" srcset="'.$d['img_1'].'" />'."\n";}
+		if( !((strlen(strip_tags($d['media_query_2']))  ==0 ) || ( strlen(strip_tags($d['img_2'])) ==0 )) ){$str.='<source media="'.$d['media_query_2'].'" srcset="'.$d['img_2'].'" />'."\n";}
+		if( !((strlen(strip_tags($d['media_query_3']))  ==0 ) || ( strlen(strip_tags($d['img_3'])) ==0 )) ){$str.='<source media="'.$d['media_query_3'].'" srcset="'.$d['img_3'].'" />'."\n";}
+		if( !(( strlen(strip_tags($d['default_img'])) ==0 )) ){$str.='<img src="'.$d['default_img'].'"';}
+		if( !(( strlen(strip_tags($d['img_title'])) ==0 )) ){$str.=' title="'.$d['img_title'].'"';}
+		if( !(( strlen(strip_tags($d['img_alt'])) ==0 )) ){$str.=' alt="'.$d['img_alt'].'"';}
+		if( !(( strlen(strip_tags($d['default_img'])) ==0 )) ){$str.=' >'."\n";}
+		$str.='</picture>'."\n";
+		return $str;
+		return '<pre>'.print_r($request->all(), true).'</pre>';
+	}
+}
+
+
+/**
+ * 
+
+Array
+(
+img_title
+img_alt
+
+
+    [media_query_0] => 
+    [img_0] => 
+    [media_query_1] => 
+    [img_1] => 
+    [media_query_2] => 
+    [img_2] => 
+    [media_query_3] => 
+    [img_3] => 
+    [default_img_width] => 
+    [default_img] => 
+)
+
+ */
