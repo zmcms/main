@@ -31,10 +31,8 @@ return [
 	 * Kolumna 1 to nazwa funkcji - helpera
 	 * Druga kolumna to tablica parametrów wywołaniafunkcji
 	 */
-	'frontent_home_page_modules'	=>	[
-		['nazwa_helpera_1',		['par1'=>'val1','par2'=>'val2','par3'=>'val1',]],
-		['nazwa_helpera_2',		['par1'=>'val1','par2'=>'val2','par3'=>'val1',]],
-		/** .... **/
-		['nazwa_helpera_N',		['par1'=>'val1','par2'=>'val2','par3'=>'val1',]],
+	'home_page_modules'	=>	[
+		
 	],
+	
 ];
