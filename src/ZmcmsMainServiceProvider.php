@@ -10,16 +10,15 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 		$this->app->make('Zmcms\Main\Frontend\Controllers\ZmcmsMainController');
 		require_once(__DIR__.'/helpers.php');
 	}
-
 	public function boot(){
 		$mod_path = base_path().DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR;
 		$this->app['router']->middlewareGroup('FrontendUser', []);
 		$this->app['router']->middlewareGroup('BackendUser', []);
 		
-		if(Config::has('zmcms.middleware')){
-			$m=Config('zmcms.middleware.frontend');
+		if(Config::has(Config('zmcms.frontend.theme_name').'.middleware')){
+			$m=Config(Config('zmcms.frontend.theme_name').'.middleware.frontend');
 			foreach($m as $n)$this->app['router']->pushMiddlewareToGroup('FrontendUser', $n);
-			$m=Config('zmcms.middleware.backend');
+			$m=Config(Config('zmcms.frontend.theme_name').'.middleware.backend');
 			foreach($m as $n)$this->app['router']->pushMiddlewareToGroup('BackendUser', $n);
 		}
 		// Ładowanie routiongów backendu

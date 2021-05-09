@@ -223,3 +223,26 @@ function recordset_sort_data($do, $set, $params = []){
 		}
 	}
 }
+
+/**
+ * CZYSZCZENIE TABLIC Z FORMULARZY (prosty antywłam)
+ */
+
+function arr_sanitize($arr){
+	if (!empty( $arr ) && is_array( $arr ) ) {
+  		foreach( $arr as $key => $value ) {
+  		  $arr2[strip_tags($key)] = strip_tags($value);
+  		}
+  		return $arr2;
+	}
+	return [];
+}
+
+function email_validate($mail){
+	$result = filter_var($mail, FILTER_SANITIZE_EMAIL);
+	if (filter_var($result, FILTER_VALIDATE_EMAIL)) {
+	    return true;
+	}
+	return false;
+}
+
