@@ -72,6 +72,7 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 			__DIR__.'/frontend/css' => base_path('public/themes/zmcms/frontend/css'),
 			__DIR__.'/backend/js' => base_path('public/themes/zmcms/backend/js'),
 			__DIR__.'/frontend/js' => base_path('public/themes/zmcms/frontend/js'),
+			__DIR__.'/media' => base_path('public/themes/zmcms/media'),
 		]);
 
 		View::addLocation(__DIR__.DIRECTORY_SEPARATOR.'/backend/views');
