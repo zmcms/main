@@ -21,7 +21,7 @@
 	</head>
 <body>
 	@if(Session::has('backend_user'))
-	<header class="medium10 medium-margin1">
+	<header class="micro12">
 		<nav>
 			<ul>
 				<li><a href="/{{Config('zmcms.main.backend_prefix').'/home'}}"><span class="fas fa-home"></span></a></li>
@@ -30,7 +30,7 @@
 		</nav>
 	</header>
 	@endif
-	<content class="medium10 medium-margin1">
+	<content class="micro12">
 		@yield('content')
 	</content>
 	
