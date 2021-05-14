@@ -29,6 +29,7 @@
 			</ul>
 		</nav>
 	</header>
+	<div class="underheadbelt">&nbsp;</div>
 	@endif
 	<content class="micro12">
 		@yield('content')
