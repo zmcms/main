@@ -63,16 +63,33 @@ class ZmcmsMainServiceProvider extends ServiceProvider{
 			unlink(__DIR__.'/backend/js/tinymce.zip');
 			unset($zip);
 		}
+		if(is_file(__DIR__.'/frontend/awesome_fonts.zip')){
+			$zip = new \ZipArchive;
+			$res = $zip->open(__DIR__.'/frontend/awesome_fonts.zip');
+			if ($res === TRUE) {
+			    $zip->extractTo(__DIR__.'/frontend/');
+			    $zip->close();
+			}
+			unlink(__DIR__.'/frontend/awesome_fonts.zip');
+			unset($zip);
+		}
 		$this->publishes([
-			__DIR__.'/lang' => base_path('config/zmcms/lang'),
-			__DIR__.'/backend/views' => base_path('resources/views/themes/zmcms/backend'),
-			__DIR__.'/frontend/views' => base_path('resources/views/themes/zmcms/frontend'),
-			__DIR__.'/config' => base_path('config/zmcms'),
-			__DIR__.'/backend/css' => base_path('public/themes/zmcms/backend/css'),
-			__DIR__.'/frontend/css' => base_path('public/themes/zmcms/frontend/css'),
-			__DIR__.'/backend/js' => base_path('public/themes/zmcms/backend/js'),
-			__DIR__.'/frontend/js' => base_path('public/themes/zmcms/frontend/js'),
-			__DIR__.'/media' => base_path('public/themes/zmcms/media'),
+			__DIR__.'/lang' => base_path('config/'.Config('zmcms.frontend.theme_name').'/lang'),
+			__DIR__.'/backend/views' => base_path('resources/views/themes/'.Config('zmcms.frontend.theme_name').'/backend'),
+			__DIR__.'/frontend/views' => base_path('resources/views/themes/'.Config('zmcms.frontend.theme_name').'/frontend'),
+			__DIR__.'/config' => base_path('config/'.Config('zmcms.frontend.theme_name').''),
+			__DIR__.'/backend/css' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/backend/css'),
+			__DIR__.'/frontend/css' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/css'),
+			__DIR__.'/frontend/less' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/less'),
+			__DIR__.'/frontend/metadata' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/metadata'),
+			__DIR__.'/frontend/scss' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/scss'),
+			__DIR__.'/frontend/sprites' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/sprites'),
+			__DIR__.'/frontend/svgs' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/svgs'),
+			__DIR__.'/frontend/webfonts' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/webfonts'),
+			__DIR__.'/backend/js' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/backend/js'),
+			__DIR__.'/frontend/js' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend/js'),
+			__DIR__.'/frontend' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/frontend'),
+			__DIR__.'/media' => base_path('public/themes/'.Config('zmcms.frontend.theme_name').'/media'),
 		]);
 
 		View::addLocation(__DIR__.DIRECTORY_SEPARATOR.'/backend/views');
