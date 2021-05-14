@@ -17,7 +17,7 @@
 		"zmcms/website_galleries":"*",
 		"zmcms/website_navigations":"*",
 		"zmcms/website_offer":"*",
-		"aftermarketpl/api":"*",
+		"aftermarketpl/api":"*"
 	},
 	"autoload": {
             "psr-4": {
