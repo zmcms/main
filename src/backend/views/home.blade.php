@@ -5,9 +5,4 @@
 	{!!view()->file($v)!!}
 @endforeach
 </div>
-<div class="micro12">
-	<pre>
-		{{print_r($af_api, true)}}
-	</pre>
-</div>
 @endsection
