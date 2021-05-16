@@ -1,6 +1,4 @@
-@extends('themes.zmcms.frontend.main')
+@extends('themes.'.(Config('zmcms.frontend.theme_name') ?? 'zmcms').'.frontend.main')
 @section('content')
-<div>
-	<h1>Here is start page content</h1>
-</div>
+	@include('themes.'.(Config('zmcms.frontend.theme_name') ?? 'zmcms').'.frontend.home.parts.main_offer')
 @endsection
