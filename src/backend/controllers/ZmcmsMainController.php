@@ -14,36 +14,25 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 			.'* Odpowiednie opcje znajdziesz w sekcji "Ustawienia"'."\n"
 			.'**/'."\n";
 	public function zmcms_main_home(){		
-		$af_api=[
-			'a'=>'b',
-		];
-		$client = new \Aftermarketpl\Api\Client(array(
-    		"key" => "d4etc5ntsu6xyq4z6ziu2q1bjhmynxhe",
-    		"secret" => "0ymiabdwsom5dmzj7s4dbsgo6zmh3k0g",
-		));
-		$af_api = [
-			'balance'=>print_r($client->send("/account/balance"), true), 
-			'currency'=>print_r($client->send("/account/currency"), true), 
-			'id'=>print_r($client->send("/account/id"), true), 
-			'login'=>print_r($client->send("/account/login"), true), 
-			'contact_list'=>print_r($client->send("/contact/list"), true), 
-			'domain_check_free'=>print_r($client->send("/domain/check", ['names'=>'domenajaksa.pl']), true), 
-			'domain_check_not_free'=>print_r($client->send("/domain/check", ['names'=>'co-it.pl']), true), 
-			'contact_get'=>print_r($client->send("/contact/get", ['contactId'=>'162765']), true), 
-			'contact_domain_list'=>print_r($client->send("/contact/domain/list", ['contactId'=>'162765']), true), 
-			
-			
-			
-		];
-		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.home', compact('af_api'));
-		/**
-		 * 
-	/account/balance
-	/account/currency
-	/account/id
-	/account/login
-	/auction/bid/list
-		 */
+// 		$af_api=[
+// 			'a'=>'b',
+// 		];
+// 		$client = new \Aftermarketpl\Api\Client(array(
+//     		"key" => "d4etc5ntsu6xyq4z6ziu2q1bjhmynxhe",
+//     		"secret" => "0ymiabdwsom5dmzj7s4dbsgo6zmh3k0g",
+// 		));
+// 		$af_api = [
+// 			'balance'=>print_r($client->send("/account/balance"), true), 
+// 			'currency'=>print_r($client->send("/account/currency"), true), 
+// 			'id'=>print_r($client->send("/account/id"), true), 
+// 			'login'=>print_r($client->send("/account/login"), true), 
+// 			'contact_list'=>print_r($client->send("/contact/list"), true), 
+// 			'domain_check_free'=>print_r($client->send("/domain/check", ['names'=>'domenajaksa.pl']), true), 
+// 			'domain_check_not_free'=>print_r($client->send("/domain/check", ['names'=>'co-it.pl']), true), 
+// 			'contact_get'=>print_r($client->send("/contact/get", ['contactId'=>'162765']), true), 
+// 			'contact_domain_list'=>print_r($client->send("/contact/domain/list", ['contactId'=>'162765']), true), 
+// 		];
+		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.home');
 	}
 
 	/**
