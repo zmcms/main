@@ -48,7 +48,7 @@ return [
 		[
 			'Zmcms\WebsiteNavigations\Frontend\Controllers\ZmcmsWebsiteNavigationsController@home', 
 			[
-				'position'=>'start_page', 
+				'position'=>'home', 
 				'q'=>6, 
 				'view'=>'themes.zmcms.frontend.home.parts.main_offer',
 			],
