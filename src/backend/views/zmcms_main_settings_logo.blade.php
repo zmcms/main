@@ -5,9 +5,9 @@
 <form class="micro12" id="zmcms_main_frm_logo" method="post" enctype="multipart/form-data">
     {!! csrf_field() !!}
     <fieldset>
-        <div class="micro12 mini6">
+        <div class="micro12">
             <div class="micro12">
-        	   <strong>Logo</strong> - Plik graficzny z logo. Zalecane są formaty: *.gif, *.jpg, *.png, *.svg. 
+               <strong>Logo</strong> - Plik graficzny z logo. Zalecane są formaty: *.gif, *.jpg, *.png, *.svg. 
             </div>
             <div class="micro12 mini3">
                 <select name="logo_width">
@@ -21,14 +21,14 @@
             <input id="zmcms_main_choose_logo_txt" type="text" name="logo" placeholder=" ">
             <label>Wybierz logo</label>
             </div>
-        	<div class="micro4 mini2">
+            <div class="micro4 mini2">
                 <button id="zmcms_main_choose_logo">Wybierz</button>
             </div>
                 
             
             
         </div>
-        <div class="micro12 mini6">
+        <div class="micro12">
             <div class="micro12">
                <strong>Favicona</strong> - Plik graficzny favicony. Zalecane są formaty: *.gif, *.jpg, *.png, *.ico.
             </div>
@@ -46,6 +46,27 @@
             </div>
             <div class="micro4 mini2">
                 <button id="zmcms_main_choose_favicon">Wybierz</button>
+            </div>
+        </div>
+
+        <div class="micro12">
+            <div class="micro12">
+               <strong>Placeholder</strong> - Plik graficzny używany w miejscu np. brakującej ilustracji graficznej. Zalecane formaty: *.gif, *.jpg, *.png, *svg.
+            </div>
+            <div class="micro12 mini3">
+                <select name="placeholder_width">
+                    @foreach(Config(Config('zmcms.frontend.theme_name').'.media.img.sizes') as $s)
+                        <option value="{{$s}}">{{$s}} px</option>
+                    @endforeach
+                </select>
+                <label>Szerokość placeholdera</label>
+            </div>
+            <div class="micro8 mini7">
+                <input  id="zmcms_main_choose_placeholder_txt" type="text" name="placeholder" placeholder=" ">
+                <label>Wybierz placeholder</label>
+            </div>
+            <div class="micro4 mini2">
+                <button id="zmcms_main_choose_placeholder">Wybierz</button>
             </div>
         </div>
     </fieldset>
