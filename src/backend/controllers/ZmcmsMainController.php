@@ -14,24 +14,6 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 			.'* Odpowiednie opcje znajdziesz w sekcji "Ustawienia"'."\n"
 			.'**/'."\n";
 	public function zmcms_main_home(){		
-// 		$af_api=[
-// 			'a'=>'b',
-// 		];
-// 		$client = new \Aftermarketpl\Api\Client(array(
-//     		"key" => "d4etc5ntsu6xyq4z6ziu2q1bjhmynxhe",
-//     		"secret" => "0ymiabdwsom5dmzj7s4dbsgo6zmh3k0g",
-// 		));
-// 		$af_api = [
-// 			'balance'=>print_r($client->send("/account/balance"), true), 
-// 			'currency'=>print_r($client->send("/account/currency"), true), 
-// 			'id'=>print_r($client->send("/account/id"), true), 
-// 			'login'=>print_r($client->send("/account/login"), true), 
-// 			'contact_list'=>print_r($client->send("/contact/list"), true), 
-// 			'domain_check_free'=>print_r($client->send("/domain/check", ['names'=>'domenajaksa.pl']), true), 
-// 			'domain_check_not_free'=>print_r($client->send("/domain/check", ['names'=>'co-it.pl']), true), 
-// 			'contact_get'=>print_r($client->send("/contact/get", ['contactId'=>'162765']), true), 
-// 			'contact_domain_list'=>print_r($client->send("/contact/domain/list", ['contactId'=>'162765']), true), 
-// 		];
 		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.home');
 	}
 
@@ -107,6 +89,7 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 				'folder'=>'/themes/'.Config('zmcms.frontend.theme_name').'/media/', 
 				'logo'=>'/themes/'.Config('zmcms.frontend.theme_name').'/media/site/logo.png', 
 				'icon'=>'/themes/'.Config('zmcms.frontend.theme_name').'/media/site/icon.png', 
+				'placeholder'=>'/themes/'.Config('zmcms.frontend.theme_name').'/media/placeholder.svg', 
 				'img'=>[
 					'sizes'=>[15, 30, 100, 200, 300, 600, 800, 1024, 1400, 1980, ],
 					'types'=>[],
@@ -119,43 +102,69 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 		return view('themes.'.Config('zmcms.frontend.theme_name').'.backend.zmcms_main_settings_logo', compact('data'));
 	}
 	public function zmcms_main_frm_logo_update(Request $request){
+		$d=DIRECTORY_SEPARATOR;
 		$data = $request->all();
 		$config_media = Config('zmcms.media');
+
+		// Tworzenie katalogu media/site, gdyby nie było:
+		$location = '/themes/'.Config('zmcms.frontend.theme_name').'/media/site';
+		$fldr = base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/site';
+		if(!file_exists($fldr)){@mkdir($fldr, 0777, true);};
+
+		// Zmiana logo
 		if(strlen($data['logo'])!=0){
-
-			$data['logo']=base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/'.$data['logo'];
-			$target = Config(Config('zmcms.frontend.theme_name').'.media.logo');
-
-			$image = Image::make($data['logo'])->resize($data['logo_width'], null, function ($constraint) {
-    			$constraint->aspectRatio();
-			});
-			$tst = base_path().'/public/'.$config_media['logo'];
-			if(!file_exists($tst)){
-				@mkdir($tst, 0777, true);
+			$data['selected_file']=base_path().$d.'public'.$data['logo'];
+			$tst = pathinfo($data['selected_file']);
+			if($tst['extension']!='svg'){
+				$image = Image::make($data['selected_file'])->resize($data['logo_width'], null, function ($constraint) {
+    				$constraint->aspectRatio();
+				});	
+				$image->save($fldr.$d.'logo.'.$tst['extension'], 100);
+			}else{
+				copy(
+					$data['selected_file'],
+					$fldr.$d.'logo.'.$tst['extension']
+				);
 			}
-			@rmdir($tst);
-			// if(file_exists(base_path().'/public/'.$config_media['logo'])) unlink(base_path().'/public/'.$config_media['logo']));
-			$image->save(base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/site/logo.png', 80);
-			$config_media['logo'] = 'themes/'.Config('zmcms.frontend.theme_name').'/media/site/logo.png';
+			$config_media['logo'] = $location.$d.'logo.'.$tst['extension'];
 		}
+
+		// Zmiana favicony
 		if(strlen($data['favicon'])!=0){
-
-			$data['favicon']=base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/'.$data['favicon'];
-			$target = Config(Config('zmcms.frontend.theme_name').'.media.icon');
-
-			$image = Image::make($data['favicon'])->resize($data['favicon_width'], null, function ($constraint) {
-    			$constraint->aspectRatio();
-			});
-			$tst = base_path().'/public/'.$config_media['icon'];
-			if(!file_exists($tst)){
-				@mkdir($tst, 0777, true);
+			$data['selected_file']=base_path().$d.'public'.$data['favicon'];
+			$tst = pathinfo($data['selected_file']);
+			if($tst['extension']!='svg'){
+				$image = Image::make($data['selected_file'])->resize($data['favicon_width'], null, function ($constraint) {
+    				$constraint->aspectRatio();
+				});	
+				$image->save($fldr.$d.'favicon.'.$tst['extension'], 100);
+			}else{
+				copy(
+					$data['selected_file'],
+					$fldr.$d.'favicon.'.$tst['extension']
+				);
 			}
-			@rmdir($tst);
-			// if(file_exists(base_path().'/public/'.$config_media['icon'])) unlink(base_path().'/public/'.$config_media['icon']));
-			$image->save(base_path().'/public/themes/'.Config('zmcms.frontend.theme_name').'/media/site/icon.png', 80);
-			$config_media['icon'] = 'themes/'.Config('zmcms.frontend.theme_name').'/media/site/icon.png';
-			
+			$config_media['icon'] = $location.$d.'favicon.'.$tst['extension'];
 		}
+
+		// Zmiana placeholdera
+		if(strlen($data['placeholder'])!=0){
+			$data['selected_file']=base_path().$d.'public'.$data['placeholder'];
+			$tst = pathinfo($data['selected_file']);
+			if($tst['extension']!='svg'){
+				$image = Image::make($data['selected_file'])->resize($data['placeholder_width'], null, function ($constraint) {
+    				$constraint->aspectRatio();
+				});	
+				$image->save($fldr.$d.'placeholder.'.$tst['extension'], 100);
+			}else{
+				copy(
+					$data['selected_file'],
+					$fldr.$d.'placeholder.'.$tst['extension']
+				);
+			}
+			$config_media['placeholder'] = $location.$d.'placeholder.'.$tst['extension'];
+		}
+		// return print_r($config_media, true);
 		zmcms_config_file('media', $config_media);
 
 		return 'ok';
@@ -413,8 +422,6 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 		$d = $request->all();
 		$x[$d['set']] = $d['txt_filter']; 
 		Session::put('db_filters', $x);
-		// return '<pre color="fff">'.print_r(Session::get('db_filters'), true).'</pre>';
-		// return '<pre color="fff">'.print_r(Session::get('db_filters'), true).'</pre>';
 	}
 	/**
 	 * Formularz do wstawienia ibrazka RWD (<picture></picture>)
@@ -447,27 +454,3 @@ class ZmcmsMainController extends \App\Http\Controllers\Controller
 		DB::statement($sql);
 	}
 }
-
-
-/**
- * 
-
-Array
-(
-img_title
-img_alt
-
-
-    [media_query_0] => 
-    [img_0] => 
-    [media_query_1] => 
-    [img_1] => 
-    [media_query_2] => 
-    [img_2] => 
-    [media_query_3] => 
-    [img_3] => 
-    [default_img_width] => 
-    [default_img] => 
-)
-
- */
