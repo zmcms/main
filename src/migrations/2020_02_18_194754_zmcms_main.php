@@ -15,7 +15,9 @@ class ZmcmsMain extends Migration{
 
 		$tblName=$tblNamePrefix.'zmcms_routes_table';
 		Schema::create($tblName, function($table){$table->string('path', 180);});  // ścieżka po adresie serwisu www
+		Schema::table($tblName, function($table){$table->string('token', 75)->nullable()->after('path');});  // token do nawigacji, artykułu itp
 		Schema::table($tblName, function($table){$table->string('parameters', 400);});  // ewentualne parametry w formacie json
+		Schema::table($tblName, function($table){$table->index(['token'], 'tkey3');});
 		Schema::table($tblName, function($table){$table->primary(['path'], 'tkey2');});
 
 		$tblName=$tblNamePrefix.'zmcms_translations';
