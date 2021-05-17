@@ -94,7 +94,7 @@ $(document).ready(function(){
 			$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 			$('#ajax_dialog_box').fadeIn( "slow", function() {});
 			$('#ajax_dialog_box_content').html('<iframe  width="'+(0.90*$(window).width())+'px" height="'+(0.85*$(window.top).height())+'px" frameborder="0" '+
-					'src="/themes/zmcms/backend/js/filemanager/dialog.php?type=0&field_id=zmcms_main_choose_logo_txt&relative_url=1&multiple=false&callback=responsive_filemanager_callback"'+
+					'src="/themes/zmcms/backend/js/filemanager/dialog.php?type=0&field_id=zmcms_main_choose_logo_txt&relative_url=0&multiple=false&callback=responsive_filemanager_callback"'+
 					'></iframe>');
 		return false;
 	});	
@@ -103,10 +103,20 @@ $(document).ready(function(){
 			$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 			$('#ajax_dialog_box').fadeIn( "slow", function() {});
 			$('#ajax_dialog_box_content').html('<iframe  width="'+(0.90*$(window).width())+'px" height="'+(0.85*$(window.top).height())+'px" frameborder="0" '+
-					'src="/themes/zmcms/backend/js/filemanager/dialog.php?type=0&field_id=zmcms_main_choose_favicon_txt&relative_url=1&multiple=false&callback=responsive_filemanager_callback"'+
+					'src="/themes/zmcms/backend/js/filemanager/dialog.php?type=0&field_id=zmcms_main_choose_favicon_txt&relative_url=0&multiple=false&callback=responsive_filemanager_callback"'+
 					'></iframe>');
 		return false;
 	});	
+	$("#zmcms_main_choose_placeholder").on('click', function(e){
+			e.preventDefault();e.stopPropagation();
+			$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+			$('#ajax_dialog_box').fadeIn( "slow", function() {});
+			$('#ajax_dialog_box_content').html('<iframe  width="'+(0.90*$(window).width())+'px" height="'+(0.85*$(window.top).height())+'px" frameborder="0" '+
+					'src="/themes/zmcms/backend/js/filemanager/dialog.php?type=0&field_id=zmcms_main_choose_placeholder_txt&relative_url=0&multiple=false&callback=responsive_filemanager_callback"'+
+					'></iframe>');
+		return false;
+	});	
+	
 	$("#seosem_default_open").on('click', function(e){
 		location.href = "/"+backend_prefix+"/home/settings/seo_sem_frm";
 		return false;
