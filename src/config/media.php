@@ -8,8 +8,8 @@
 
 return array (
   'folder' => '/themes/zmcms/media/',
-  'logo' => '/themes/zmcms/media/site/logo.png',
-  'icon' => '/themes/zmcms/media/site/icon.png',
+  'logo' => '/themes/zmcms/media/site/logo.svg',
+  'icon' => '/themes/zmcms/media/site/favicon.svg',
   'placeholder' => '/themes/zmcms/media/site/placeholder.svg',
   'img' => 
   array (
