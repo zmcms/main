@@ -10,6 +10,7 @@ return array (
   'folder' => '/themes/zmcms/media/',
   'logo' => '/themes/zmcms/media/site/logo.png',
   'icon' => '/themes/zmcms/media/site/icon.png',
+  'placeholder' => '/themes/zmcms/media/site/placeholder.svg',
   'img' => 
   array (
     'sizes' => 
