@@ -56,6 +56,7 @@
         toolbar: 'code image media | fullpage | bold italic underline strikethrough casechange| alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect | cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor | insertdatetime preview | forecolor backcolor | table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft',
       });
     </script>
+@stack('custom_js')
 @include('themes.'.Config('zmcms.frontend.theme_name').'.backend.zmcms_main_ajax_dialog_box')
 </body>
 </html>
