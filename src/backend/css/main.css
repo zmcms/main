@@ -51,6 +51,9 @@ header>nav>ul>li>a{padding: .5rem;margin-left: .5rem}
 .tox-fullscreen .tox.tox-tinymce.tox-fullscreen{
     z-index: 3000000000 !important;
 }
+#ajax_dialog_box_content{
+    display: block; position: absolute; width: auto; height: auto; top: 50%;left: 50%; transform: translate(-50%, -50%);border: solid;
+}
     /**
      * FORMULARZ
     **/
