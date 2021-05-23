@@ -111,6 +111,13 @@ header>nav>ul>li>a{padding: .5rem;margin-left: .5rem}
 .linker>input[type="radio"]:not(:checked)+.linker_tree{
     display: none
 }
+
+.linker_frm>header, .linker_frm>content{display: flex; flex-direction: row; position: relative;width: auto;background: none;text-align: center;}
+.linker_frm>header{
+    background-color: green;
+}
+.linker_frm>header>a{display: inline-block; color: #efefef;padding: .5rem; margin: .2rem; border: solid 1px #ddd}
+
 /**
  * MICRO
  **/
